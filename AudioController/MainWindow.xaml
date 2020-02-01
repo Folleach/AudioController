@@ -4,9 +4,100 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AudioController"
+        xmlns:controls="clr-namespace:AudioController.Controls"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="Audio Controller" Height="450" Width="800">
+    <Grid Style="{DynamicResource Background}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0" Style="{DynamicResource Overlay}">
+            <Grid Height="192" VerticalAlignment="Top" Style="{DynamicResource Overlay}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label Content="Audio Controller" Style="{DynamicResource Header1}"/>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="160" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Global Active (P)" Style="{DynamicResource DefaultText}" />
+                    <Label x:Name="Global_Active" Content="No" Grid.Column="1" Style="{DynamicResource DefaultText}" />
+                </Grid>
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="160" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Time to update (ms)" Style="{DynamicResource DefaultText}" />
+                </Grid>
+                <Grid Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="160" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Content="3 devices available" Style="{DynamicResource DefaultText}" />
+                    <Button Content="Update" Grid.Column="1" Style="{DynamicResource DefaultButton}" />
+                </Grid>
+                <Grid Grid.Row="4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="160" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Test window" Style="{DynamicResource DefaultText}" />
+                    <Button Content="Open" Grid.Column="1" Style="{DynamicResource DefaultButton}" />
+                </Grid>
+                <Grid Grid.Row="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="160" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Events" Style="{DynamicResource Header1}" />
+                    <Button Content="Add" Grid.Column="1" Style="{DynamicResource DefaultButton}" />
+                </Grid>
+            </Grid>
+            <ScrollViewer Margin="0 192 0 0" Style="{DynamicResource Default}">
+                <StackPanel x:Name="EventsContainer">
+                    
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+        <Grid Grid.Column="1" Margin="4">
+            <Grid>
+                <Label Style="{DynamicResource LargeText}" Content="Nothing to see here..." VerticalAlignment="Center" HorizontalContentAlignment="Center"/>
+            </Grid>
+            <ScrollViewer Style="{DynamicResource Default}">
+                <StackPanel x:Name="ContentStack" Style="{DynamicResource Background}">
+                    <Label x:Name="Content_Name" Content="Event name" Style="{DynamicResource Header1}" />
+                    <Label x:Name="Content_State" Content="Current state: ON" Style="{DynamicResource DefaultText}" />
+                    <Border Style="{DynamicResource UnderlineBorder}" />
+                    <Label Content="Audio Device" Style="{DynamicResource Header2}" />
+                    <ComboBox x:Name="Content_Devices"></ComboBox>
+                    <ProgressBar x:Name="Content_DeviceValue" Value="4" Height="8" Margin="0 4 0 0" Style="{DynamicResource DefaultProgressBar}"/>
+                    <Border Style="{DynamicResource UnderlineBorder}" />
+                    <Label Content="Critical Value" Style="{DynamicResource Header2}" />
+                    <Slider x:Name="Content_CriticalValue" />
+                    <Border Style="{DynamicResource UnderlineBorder}" />
+                    <Label Content="Mode" Style="{DynamicResource Header2}" />
+                    <StackPanel>
+                        <RadioButton x:Name="Content_ModeHold" Content="Hold" Style="{DynamicResource DefaultRadioButton}" />
+                        <RadioButton x:Name="Content_ModeSwitch" Content="Switch" Style="{DynamicResource DefaultRadioButton}" />
+                    </StackPanel>
+                    <Border Style="{DynamicResource UnderlineBorder}" />
+                    <Label Content="Actions" Style="{DynamicResource Header2}" />
+                    <StackPanel x:Name="Content_ActionsContainer">
+
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
     </Grid>
 </Window>
