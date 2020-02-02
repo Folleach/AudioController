@@ -29,7 +29,7 @@
                         <ColumnDefinition Width="160" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Label Content="Global Active (P)" Style="{DynamicResource DefaultText}" />
+                    <Label Content="Global Active (F6)" Style="{DynamicResource DefaultText}" />
                     <Label x:Name="Global_Active" Content="No" Grid.Column="1" Style="{DynamicResource DefaultText}" />
                 </Grid>
                 <Grid Grid.Row="2">
@@ -38,14 +38,15 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Label Content="Time to update (ms)" Style="{DynamicResource DefaultText}" />
+                    <TextBox x:Name="Global_TTU" Grid.Column="1" Style="{DynamicResource EditableLabelDefaultText}" LostFocus="ChangeGlobalTTU"/>
                 </Grid>
                 <Grid Grid.Row="3">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="160" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Label Content="3 devices available" Style="{DynamicResource DefaultText}" />
-                    <Button Content="Update" Grid.Column="1" Style="{DynamicResource DefaultButton}" />
+                    <Label x:Name="Global_DeviceAvailableText" Content="3 devices available" Style="{DynamicResource DefaultText}" />
+                    <Button Content="Update" Grid.Column="1" Style="{DynamicResource DefaultButton}" Click="UpdateDevice"/>
                 </Grid>
                 <Grid Grid.Row="4">
                     <Grid.ColumnDefinitions>
@@ -53,7 +54,7 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Label Content="Test window" Style="{DynamicResource DefaultText}" />
-                    <Button Content="Open" Grid.Column="1" Style="{DynamicResource DefaultButton}" />
+                    <Button Content="Open" Grid.Column="1" Style="{DynamicResource DefaultButton}" Click="OpenTestWindow"/>
                 </Grid>
                 <Grid Grid.Row="5">
                     <Grid.ColumnDefinitions>
@@ -61,7 +62,7 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Label Content="Events" Style="{DynamicResource Header1}" />
-                    <Button Content="Add" Grid.Column="1" Style="{DynamicResource DefaultButton}" />
+                    <Button Content="Add" Grid.Column="1" Style="{DynamicResource DefaultButton}" Click="AddEvent"/>
                 </Grid>
             </Grid>
             <ScrollViewer Margin="0 192 0 0" Style="{DynamicResource Default}">
@@ -76,15 +77,25 @@
             </Grid>
             <ScrollViewer Style="{DynamicResource Default}">
                 <StackPanel x:Name="ContentStack" Style="{DynamicResource Background}">
-                    <Label x:Name="Content_Name" Content="Event name" Style="{DynamicResource Header1}" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="120" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="Content_Name" Text="Long name for test yeee" Style="{DynamicResource EditableLabelHeader1}" LostFocus="ChangeNameOfSelectedEvent"/>
+                        <Button Content="Delete" Grid.Column="1" Style="{DynamicResource DefaultButton}" Click="DeleteSelectedEvent"/>
+                    </Grid>
+                    
                     <Label x:Name="Content_State" Content="Current state: ON" Style="{DynamicResource DefaultText}" />
                     <Border Style="{DynamicResource UnderlineBorder}" />
                     <Label Content="Audio Device" Style="{DynamicResource Header2}" />
-                    <ComboBox x:Name="Content_Devices"></ComboBox>
-                    <ProgressBar x:Name="Content_DeviceValue" Value="4" Height="8" Margin="0 4 0 0" Style="{DynamicResource DefaultProgressBar}"/>
+                    <StackPanel x:Name="Content_Devices">
+                        
+                    </StackPanel>
+                    <ProgressBar x:Name="Content_DeviceValue" Height="8" Margin="0 4 0 0" Minimum="0" Maximum="1" Style="{DynamicResource DefaultProgressBar}"/>
                     <Border Style="{DynamicResource UnderlineBorder}" />
                     <Label Content="Critical Value" Style="{DynamicResource Header2}" />
-                    <Slider x:Name="Content_CriticalValue" />
+                    <Slider x:Name="Content_CriticalValue" Minimum="0" Maximum="1" ValueChanged="Content_ChangeCriticalValue"/>
                     <Border Style="{DynamicResource UnderlineBorder}" />
                     <Label Content="Mode" Style="{DynamicResource Header2}" />
                     <StackPanel>
