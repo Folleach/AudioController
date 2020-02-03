@@ -23,7 +23,7 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <Label Content="Audio Controller" Style="{DynamicResource Header1}"/>
+                <Label Content="Audio Controller" Style="{DynamicResource Header1}" />
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="160" />
@@ -38,7 +38,7 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Label Content="Time to update (ms)" Style="{DynamicResource DefaultText}" />
-                    <TextBox x:Name="Global_TTU" Grid.Column="1" Style="{DynamicResource EditableLabelDefaultText}" LostFocus="ChangeGlobalTTU"/>
+                    <TextBox x:Name="Global_TTU" Grid.Column="1" Style="{DynamicResource EditableLabelDefaultText}" LostFocus="ChangeGlobalTTU" />
                 </Grid>
                 <Grid Grid.Row="3">
                     <Grid.ColumnDefinitions>
@@ -46,7 +46,7 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Label x:Name="Global_DeviceAvailableText" Content="3 devices available" Style="{DynamicResource DefaultText}" />
-                    <Button Content="Update" Grid.Column="1" Style="{DynamicResource DefaultButton}" Click="UpdateDevice"/>
+                    <Button Content="Update" Grid.Column="1" Style="{DynamicResource DefaultButton}" Click="UpdateDevice" />
                 </Grid>
                 <Grid Grid.Row="4">
                     <Grid.ColumnDefinitions>
@@ -54,7 +54,7 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Label Content="Test window" Style="{DynamicResource DefaultText}" />
-                    <Button Content="Open" Grid.Column="1" Style="{DynamicResource DefaultButton}" Click="OpenTestWindow"/>
+                    <Button Content="Open" Grid.Column="1" Style="{DynamicResource DefaultButton}" Click="OpenTestWindow" />
                 </Grid>
                 <Grid Grid.Row="5">
                     <Grid.ColumnDefinitions>
@@ -62,7 +62,7 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Label Content="Events" Style="{DynamicResource Header1}" />
-                    <Button Content="Add" Grid.Column="1" Style="{DynamicResource DefaultButton}" Click="AddEvent"/>
+                    <Button Content="Add" Grid.Column="1" Style="{DynamicResource DefaultButton}" Click="AddEvent" />
                 </Grid>
             </Grid>
             <ScrollViewer Margin="0 192 0 0" Style="{DynamicResource Default}">
@@ -73,7 +73,7 @@
         </Grid>
         <Grid Grid.Column="1" Margin="4">
             <Grid>
-                <Label Style="{DynamicResource LargeText}" Content="Nothing to see here..." VerticalAlignment="Center" HorizontalContentAlignment="Center"/>
+                <Label Style="{DynamicResource LargeText}" Content="Nothing to see here..." VerticalAlignment="Center" HorizontalContentAlignment="Center" />
             </Grid>
             <ScrollViewer Style="{DynamicResource Default}">
                 <StackPanel x:Name="ContentStack" Style="{DynamicResource Background}">
@@ -82,25 +82,26 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="120" />
                         </Grid.ColumnDefinitions>
-                        <TextBox x:Name="Content_Name" Text="Long name for test yeee" Style="{DynamicResource EditableLabelHeader1}" LostFocus="ChangeNameOfSelectedEvent"/>
-                        <Button Content="Delete" Grid.Column="1" Height="30" Style="{DynamicResource DefaultButton}" Click="DeleteSelectedEvent"/>
+                        <TextBox x:Name="Content_Name" Text="Long name for test yeee" Style="{DynamicResource EditableLabelHeader1}" LostFocus="ChangeNameOfSelectedEvent" />
+                        <Button Content="Delete" Grid.Column="1" Height="30" Style="{DynamicResource DefaultButton}" Click="DeleteSelectedEvent" />
                     </Grid>
-                    
-                    <Label x:Name="Content_State" Content="Current state: ON" Style="{DynamicResource DefaultText}" MouseLeftButtonUp="ChangeStateOfSelectedEvent"/>
+                    <Border Style="{DynamicResource LightHoveredBorder}">
+                        <Label x:Name="Content_State" Content="Current state: ON" Style="{DynamicResource DefaultText}" MouseLeftButtonUp="ChangeStateOfSelectedEvent" />
+                    </Border>
                     <Border Style="{DynamicResource UnderlineBorder}" />
                     <Label Content="Audio Device" Style="{DynamicResource Header2}" />
                     <StackPanel x:Name="Content_Devices">
                         
                     </StackPanel>
-                    <ProgressBar x:Name="Content_DeviceValue" Height="8" Margin="0 4 0 0" Minimum="0" Maximum="1" Style="{DynamicResource DefaultProgressBar}"/>
+                    <ProgressBar x:Name="Content_DeviceValue" Height="8" Margin="0 4 0 0" Minimum="0" Maximum="1" Style="{DynamicResource DefaultProgressBar}" />
                     <Border Style="{DynamicResource UnderlineBorder}" />
                     <Label Content="Critical Value" Style="{DynamicResource Header2}" />
-                    <Slider x:Name="Content_CriticalValue" Minimum="0" Maximum="1" ValueChanged="Content_ChangeCriticalValue"/>
+                    <Slider x:Name="Content_CriticalValue" Minimum="0" Maximum="1" ValueChanged="Content_ChangeCriticalValue" />
                     <Border Style="{DynamicResource UnderlineBorder}" />
                     <Label Content="Mode" Style="{DynamicResource Header2}" />
                     <StackPanel>
-                        <RadioButton x:Name="Content_ModeHold" Content="Hold" Style="{DynamicResource DefaultRadioButton}" />
-                        <RadioButton x:Name="Content_ModeSwitch" Content="Switch" Style="{DynamicResource DefaultRadioButton}" />
+                        <RadioButton x:Name="Content_ModeHold" Content="Hold" Style="{DynamicResource DefaultRadioButton}" Checked="ChangeModeOfSelectionEvent" />
+                        <RadioButton x:Name="Content_ModeSwitch" Content="Switch" Style="{DynamicResource DefaultRadioButton}" Checked="ChangeModeOfSelectionEvent" />
                     </StackPanel>
                     <Border Style="{DynamicResource UnderlineBorder}" />
                     <Label Content="Actions" Style="{DynamicResource Header2}" />
@@ -112,7 +113,7 @@
                             <ColumnDefinition />
                             <ColumnDefinition Width="120" />
                         </Grid.ColumnDefinitions>
-                        <Button Content="Add action" Grid.Column="1" Style="{DynamicResource DefaultButton}" Height="30" Margin="0 2 0 0" Click="AddAction"/>
+                        <Button Content="Add action" Grid.Column="1" Style="{DynamicResource DefaultButton}" Height="30" Margin="0 2 0 0" Click="AddAction" />
                     </Grid>
                 </StackPanel>
             </ScrollViewer>

@@ -251,7 +251,17 @@ namespace AudioController
 
         private void ChangeStateOfSelectedEvent(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            if (SelectedEvent == null)
+                return;
             SelectedEvent.Active = !SelectedEvent.Active;
+            UpdateUIContent(true);
+        }
+
+        private void ChangeModeOfSelectionEvent(object sender, RoutedEventArgs e)
+        {
+            if (SelectedEvent == null)
+                return;
+            SelectedEvent.Mode = Content_ModeHold.IsChecked == true ? Mode.Hold : Mode.Switch;
             UpdateUIContent(true);
         }
     }
