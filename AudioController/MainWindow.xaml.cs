@@ -21,6 +21,7 @@ namespace AudioController
         Thread updater;
         Keyboard keyboard;
         bool needToUpdateDevices;
+        Mutex eventsMutext;
 
         public bool GlobalActive = false;
         public int GlobalDelay = 10;
@@ -33,6 +34,7 @@ namespace AudioController
         public MainWindow()
         {
             InitializeComponent();
+            eventsMutext = new Mutex();
             EventsContainer.Children.Clear();
             ContentStack.Visibility = Visibility.Collapsed;
 
@@ -97,8 +99,10 @@ namespace AudioController
                         devices.Add(device.ID, device);
                     needToUpdateDevices = false;
                 }
-                foreach (Event e in Events)
-                    e.Update(e.DeviceID != null ? devices[e.DeviceID] : null, GlobalActive);
+                eventsMutext.WaitOne();
+                foreach (Event item in Events)
+                    item.Update(item.DeviceID != null ? devices[item.DeviceID] : null, GlobalActive);
+                eventsMutext.ReleaseMutex();
                 Dispatcher.Invoke(() =>
                 {
                     UpdateUIAll();
@@ -146,7 +150,9 @@ namespace AudioController
 
         private void AddEvent(Event eventInfo)
         {
+            eventsMutext.WaitOne();
             Events.Add(eventInfo);
+            eventsMutext.ReleaseMutex();
             EventItem item = new EventItem(eventInfo, SelectEvent);
             EventsContainer.Children.Add(item);
         }
@@ -189,7 +195,9 @@ namespace AudioController
         private void DeleteSelectedEvent(object sender, RoutedEventArgs e)
         {
             EventsContainer.Children.Remove(GetUIPreviewOfSelectedEvent());
+            eventsMutext.WaitOne();
             Events.Remove(SelectedEvent);
+            eventsMutext.ReleaseMutex();
             SelectedEvent = null;
             ContentStack.Visibility = Visibility.Hidden;
         }
