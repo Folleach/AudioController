@@ -232,7 +232,7 @@ namespace AudioController
             {
                 GlobalDelay = delay;
                 string color = "RedColor";
-                if (GlobalDelay > 0 && GlobalDelay <= 16)
+                if (GlobalDelay > 1 && GlobalDelay <= 16)
                     color = "GreenColor";
                 else if (GlobalDelay > 0 && GlobalDelay <= 72)
                     color = "OrangeColor";
