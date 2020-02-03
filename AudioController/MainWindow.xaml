@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:AudioController"
         xmlns:controls="clr-namespace:AudioController.Controls"
         mc:Ignorable="d"
-        Title="Audio Controller" Height="450" Width="800">
+        Title="Audio Controller" Height="500" Width="800">
     <Grid Style="{DynamicResource Background}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*" />
@@ -83,10 +83,10 @@
                             <ColumnDefinition Width="120" />
                         </Grid.ColumnDefinitions>
                         <TextBox x:Name="Content_Name" Text="Long name for test yeee" Style="{DynamicResource EditableLabelHeader1}" LostFocus="ChangeNameOfSelectedEvent"/>
-                        <Button Content="Delete" Grid.Column="1" Height="32" Style="{DynamicResource DefaultButton}" Click="DeleteSelectedEvent"/>
+                        <Button Content="Delete" Grid.Column="1" Height="30" Style="{DynamicResource DefaultButton}" Click="DeleteSelectedEvent"/>
                     </Grid>
                     
-                    <Label x:Name="Content_State" Content="Current state: ON" Style="{DynamicResource DefaultText}" />
+                    <Label x:Name="Content_State" Content="Current state: ON" Style="{DynamicResource DefaultText}" MouseLeftButtonUp="ChangeStateOfSelectedEvent"/>
                     <Border Style="{DynamicResource UnderlineBorder}" />
                     <Label Content="Audio Device" Style="{DynamicResource Header2}" />
                     <StackPanel x:Name="Content_Devices">
@@ -105,8 +105,15 @@
                     <Border Style="{DynamicResource UnderlineBorder}" />
                     <Label Content="Actions" Style="{DynamicResource Header2}" />
                     <StackPanel x:Name="Content_ActionsContainer">
-
+                        
                     </StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="120" />
+                        </Grid.ColumnDefinitions>
+                        <Button Content="Add action" Grid.Column="1" Style="{DynamicResource DefaultButton}" Height="30" Margin="0 2 0 0" Click="AddAction"/>
+                    </Grid>
                 </StackPanel>
             </ScrollViewer>
         </Grid>

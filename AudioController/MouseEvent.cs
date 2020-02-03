@@ -3,7 +3,7 @@
 namespace AudioController
 {
     [Flags]
-    public enum MouseEvent
+    public enum LLMouseEvent
     {
         LeftDown = 0x00000002,
         LeftUp = 0x00000004,

@@ -19,7 +19,7 @@ namespace AudioController
     public partial class MainWindow : Window
     {
         Thread updater;
-        Keyboard keyboard;
+        internal static Keyboard Keyboard;
         bool needToUpdateDevices;
         Mutex eventsMutext;
 
@@ -31,6 +31,11 @@ namespace AudioController
 
         public Event SelectedEvent;
         
+        static MainWindow()
+        {
+            Keyboard = new Keyboard();
+        }
+
         public MainWindow()
         {
             InitializeComponent();
@@ -38,8 +43,7 @@ namespace AudioController
             EventsContainer.Children.Clear();
             ContentStack.Visibility = Visibility.Collapsed;
 
-            keyboard = new Keyboard();
-            keyboard.Pressed += this.Keyboard_Pressed;
+            Keyboard.Pressed += this.Keyboard_Pressed;
 
             UpdateDevice(null, null);
             StartUpdater();
@@ -75,6 +79,9 @@ namespace AudioController
                 Content_CriticalValue.Value = SelectedEvent.CriticalValue;
                 Content_ModeHold.IsChecked = SelectedEvent.Mode == Mode.Hold;
                 Content_ModeSwitch.IsChecked = SelectedEvent.Mode == Mode.Switch;
+                Content_ActionsContainer.Children.Clear();
+                foreach (DeviceAction action in SelectedEvent.Actions)
+                    Content_ActionsContainer.Children.Add(action.VisualItem);
             }
         }
 
@@ -232,6 +239,20 @@ namespace AudioController
                 Global_TTU.Foreground = (SolidColorBrush)System.Windows.Application.Current.Resources[color];
             }
             UpdateUIGlobal();
+        }
+
+        private void AddAction(object sender, RoutedEventArgs e)
+        {
+            if (SelectedEvent == null)
+                return;
+            SelectedEvent.AddAction(new DeviceAction(SelectedEvent), UpdateUIContent);
+            UpdateUIContent(true);
+        }
+
+        private void ChangeStateOfSelectedEvent(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            SelectedEvent.Active = !SelectedEvent.Active;
+            UpdateUIContent(true);
         }
     }
 }

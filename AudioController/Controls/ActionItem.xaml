@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="AudioController.Controls.ActionItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AudioController.Controls"
+             xmlns:root="clr-namespace:AudioController"
+             mc:Ignorable="d" 
+             d:DesignHeight="30" d:DesignWidth="400"
+             Height="30">
+    <Border Style="{DynamicResource LightHoveredBorder}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="2" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="2" />
+                <ColumnDefinition Width="90" />
+            </Grid.ColumnDefinitions>
+            <ComboBox x:Name="Combobox_Type" Grid.Column="0" SelectionChanged="SelectedType">
+                <ComboBoxItem Content="Mouse" Tag="1" />
+                <ComboBoxItem Content="Keyboard" Tag="2" />
+            </ComboBox>
+            <TextBox x:Name="Selector_Keyboard" Text="Select key" Grid.Column="2" Style="{DynamicResource EditableLabelDefaultText}" GotFocus="ChangeKeyboardValue"/>
+            <ComboBox x:Name="Selector_Mouse" Text="asdasdas" Grid.Column="2" SelectionChanged="ChangeMouseValue">
+                <ComboBoxItem Content="Left button" Tag="2" />
+                <ComboBoxItem Content="Middle button" Tag="8" />
+                <ComboBoxItem Content="Right button" Tag="32" />
+            </ComboBox>
+            <Button Content="Delete" Grid.Column="4" Style="{DynamicResource DefaultButton}" Click="DeleteAction" />
+        </Grid>
+    </Border>
+</UserControl>

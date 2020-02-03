@@ -24,7 +24,7 @@ namespace AudioController
             return currentMousePoint;
         }
 
-        public static void MouseEvent(MouseEvent value)
+        public static void MouseEvent(LLMouseEvent value)
         {
             MousePoint position = GetCursorPosition();
             mouse_event((int)value, position.X, position.Y, 0, 0);

@@ -1,5 +1,6 @@
 ﻿using AudioController.Controls;
 using NAudio.CoreAudioApi;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -72,6 +73,12 @@ namespace AudioController
             if (!Active || !isGlobalActive)
                 return;
             //TODO: Works with value
+        }
+
+        public void AddAction(DeviceAction action, Action<bool> updateUIContentCallback)
+        {
+            Actions.Add(action);
+            action.VisualItem = new ActionItem(updateUIContentCallback, action);
         }
     }
 }

@@ -2,7 +2,8 @@
 {
     public enum ActionType
     {
-        Keyboard = 13,
-        Mouse = 14
+        None = -1,
+        Mouse = 0,
+        Keyboard = 1
     }
 }
