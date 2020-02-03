@@ -100,8 +100,8 @@
                     <Border Style="{DynamicResource UnderlineBorder}" />
                     <Label Content="Mode" Style="{DynamicResource Header2}" />
                     <StackPanel>
-                        <RadioButton x:Name="Content_ModeHold" Content="Hold" Style="{DynamicResource DefaultRadioButton}" Checked="ChangeModeOfSelectionEvent" />
-                        <RadioButton x:Name="Content_ModeSwitch" Content="Switch" Style="{DynamicResource DefaultRadioButton}" Checked="ChangeModeOfSelectionEvent" />
+                        <RadioButton x:Name="Content_ModeHold" Content="Hold" Style="{DynamicResource CheckMark}" Checked="ChangeModeOfSelectionEvent" />
+                        <RadioButton x:Name="Content_ModeSwitch" Content="Switch" Style="{DynamicResource CheckMark}" Checked="ChangeModeOfSelectionEvent" />
                     </StackPanel>
                     <Border Style="{DynamicResource UnderlineBorder}" />
                     <Label Content="Actions" Style="{DynamicResource Header2}" />
