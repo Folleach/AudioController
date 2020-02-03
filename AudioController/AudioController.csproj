@@ -108,7 +108,7 @@
   <ItemGroup>
     <Compile Include="Mode.cs" />
     <Compile Include="Mouse.cs" />
-    <Compile Include="MouseEvent.cs" />
+    <Compile Include="LLMouseEvent.cs" />
     <Compile Include="MousePoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

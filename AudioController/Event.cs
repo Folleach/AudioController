@@ -2,9 +2,6 @@
 using NAudio.CoreAudioApi;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading;
 
 namespace AudioController
 {
@@ -52,6 +49,8 @@ namespace AudioController
                 device = value;
             }
         }
+        public float OldValue;
+        public LLMouseEvent OldEvent;
         public float CurrentValue;
         public EventItem VisualItem;
 
@@ -72,7 +71,32 @@ namespace AudioController
             CurrentValue = dd.AudioMeterInformation.MasterPeakValue;
             if (!Active || !isGlobalActive)
                 return;
-            //TODO: Works with value
+            Act(CurrentValue);
+        }
+
+        private void Act(float value)
+        {
+            if (Mode == Mode.Hold)
+            {
+                if (value >= CriticalValue && OldValue < CriticalValue)
+                    foreach (var item in Actions)
+                        item.Down();
+                else if (value < CriticalValue && OldValue >= CriticalValue)
+                    foreach (var item in Actions)
+                        item.Up();
+            }
+            //else if (Mode == Mode.Switch)
+            //{
+            //    if (value >= CriticalValue && OldValue < CriticalValue)
+            //    {
+            //        LLMouseEvent @event = OldEvent == LLMouseEvent.LeftDown ? LLMouseEvent.LeftUp : LLMouseEvent.LeftDown;
+            //        if (@event == LLMouseEvent.LeftU)
+            //        Mouse.MouseEvent(@event);
+            //        //Keyboard.KeyboardDown(System.Windows.Forms.Keys.Enter);
+            //        OldEvent = @event;
+            //    }
+            //}
+            OldValue = value;
         }
 
         public void AddAction(DeviceAction action, Action<bool> updateUIContentCallback)

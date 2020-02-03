@@ -64,7 +64,6 @@ namespace AudioController
         public static void KeyboardDown(Keys key)
         {
             keybd_event((byte)key, 0, KEYEVENTF_EXTENDEDKEY | 0, 0);
-            keybd_event((byte)key, 0, KEYEVENTF_EXTENDEDKEY | 0, 0);
         }
     }
 }

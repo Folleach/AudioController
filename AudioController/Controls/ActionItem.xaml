@@ -24,8 +24,8 @@
             <TextBox x:Name="Selector_Keyboard" Text="Select key" Grid.Column="2" Style="{DynamicResource EditableLabelDefaultText}" GotFocus="ChangeKeyboardValue"/>
             <ComboBox x:Name="Selector_Mouse" Text="asdasdas" Grid.Column="2" SelectionChanged="ChangeMouseValue">
                 <ComboBoxItem Content="Left button" Tag="2" />
-                <ComboBoxItem Content="Middle button" Tag="8" />
-                <ComboBoxItem Content="Right button" Tag="32" />
+                <ComboBoxItem Content="Middle button" Tag="32" />
+                <ComboBoxItem Content="Right button" Tag="8" />
             </ComboBox>
             <Button Content="Delete" Grid.Column="4" Style="{DynamicResource DefaultButton}" Click="DeleteAction" />
         </Grid>
