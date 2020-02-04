@@ -61,7 +61,7 @@ namespace AudioController
 
         public void Update(MMDevice dd, bool isGlobalActive)
         {
-            if (DeviceID == null)
+            if (DeviceID == null || dd == null)
                 return;
             CurrentValue = dd.AudioMeterInformation.MasterPeakValue;
             if (!Active || !isGlobalActive)

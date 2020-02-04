@@ -53,6 +53,7 @@ namespace AudioController
 
         private void TestWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            MainWindow.Keyboard.Pressed -= this.Keyboard_Pressed;
             CloseCallback();
         }
 

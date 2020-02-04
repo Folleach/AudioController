@@ -132,7 +132,7 @@ namespace AudioController
                 }
                 eventsMutext.WaitOne();
                 foreach (Event item in Events)
-                    item.Update(item.DeviceID != null ? devices[item.DeviceID] : null, GlobalActive);
+                    item.Update(item.DeviceID != null && devices.ContainsKey(item.DeviceID) ? devices[item.DeviceID] : null, GlobalActive);
                 eventsMutext.ReleaseMutex();
                 Dispatcher.Invoke(() =>
                 {
