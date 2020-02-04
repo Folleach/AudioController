@@ -22,6 +22,7 @@ namespace AudioController
         internal static Keyboard Keyboard;
         bool needToUpdateDevices;
         Mutex eventsMutext;
+        int CountOpenedTestWindows = 0;
 
         public bool GlobalActive = false;
         public int GlobalDelay = 10;
@@ -82,7 +83,7 @@ namespace AudioController
 
         private void UpdateUIAll()
         {
-            if (IsActive)
+            if (IsActive || CountOpenedTestWindows > 0)
             {
                 foreach (var item in Events)
                     item.VisualItem.UpdateUI();
@@ -170,7 +171,12 @@ namespace AudioController
 
         private void OpenTestWindow(object sender, RoutedEventArgs e)
         {
-            //TODO: Addded window
+            TestWindow window = new TestWindow(() =>
+            {
+                CountOpenedTestWindows--;
+            });
+            CountOpenedTestWindows++;
+            window.Show();
         }
 
         private void AddEvent(object sender, RoutedEventArgs e)
