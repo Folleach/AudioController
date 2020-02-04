@@ -2,11 +2,14 @@
 using NAudio.CoreAudioApi;
 using System;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace AudioController
 {
+    [Serializable]
     public class Event
     {
+        [XmlIgnore]
         private string name;
         public string Name
         {
@@ -18,9 +21,10 @@ namespace AudioController
                     VisualItem.ContentName.Content = name;
             }
         }
-        public string DeviceID { get; private set; }
+        public string DeviceID { get; set; }
         public bool Active { get; set; }
         public float criticalValue;
+        [XmlIgnore]
         public float CriticalValue
         {
             get => criticalValue;
@@ -36,37 +40,28 @@ namespace AudioController
         }
         public Mode Mode { get; set; }
         public List<DeviceAction> Actions { get; set; }
-        private MMDevice device;
-        public MMDevice Device
-        {
-            get => device;
-            set
-            {
-                if (value == null)
-                    DeviceID = null;
-                else
-                    DeviceID = value.ID;
-                device = value;
-            }
-        }
-        public float OldValue;
-        public LLMouseEvent OldEvent;
-        public float CurrentValue;
-        public EventItem VisualItem;
+        [XmlIgnore] public float OldValue;
+        [XmlIgnore] public LLMouseEvent OldEvent;
+        [XmlIgnore] public float CurrentValue;
+        [XmlIgnore] public EventItem VisualItem;
 
-        public Event(MMDevice device)
+        public Event()
+        {
+        }
+
+        public Event(string deviceID)
         {
             Name = "Event name";
             Active = false;
             CriticalValue = 0.5f;
             Mode = Mode.Hold;
             Actions = new List<DeviceAction>();
-            Device = device;
+            DeviceID = deviceID;
         }
 
         public void Update(MMDevice dd, bool isGlobalActive)
         {
-            if (Device == null)
+            if (DeviceID == null)
                 return;
             CurrentValue = dd.AudioMeterInformation.MasterPeakValue;
             if (!Active || !isGlobalActive)
@@ -103,6 +98,16 @@ namespace AudioController
         {
             Actions.Add(action);
             action.VisualItem = new ActionItem(updateUIContentCallback, action);
+        }
+
+        public void UpdateLinks(Action<bool> updateUIContentCallback)
+        {
+            foreach (var action in Actions)
+            {
+                action.VisualItem = new ActionItem(updateUIContentCallback, action);
+                action.Owner = this;
+                // action.VisualItem.UpdateSelector();
+            }
         }
     }
 }

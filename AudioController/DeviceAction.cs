@@ -1,14 +1,21 @@
 ﻿using AudioController.Controls;
+using System;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace AudioController
 {
+    [Serializable]
     public class DeviceAction
     {
         public ActionType Type = ActionType.Mouse;
         public int Value;
-        public ActionItem VisualItem;
-        public readonly Event Owner;
+        [XmlIgnore] public ActionItem VisualItem;
+        [XmlIgnore] public Event Owner;
+
+        public DeviceAction()
+        {
+        }
 
         public DeviceAction(Event owner)
         {

@@ -19,7 +19,7 @@ namespace AudioController.Controls
             UpdateUIContentCallback = updateUICallback;
             Action = action;
             Combobox_Type.SelectedIndex = (int)action.Type;
-            ShowSelector();
+            UpdateSelector();
         }
 
         private void DeleteAction(object sender, RoutedEventArgs e)
@@ -31,7 +31,6 @@ namespace AudioController.Controls
         private void SelectedType(object sender, RoutedEventArgs e)
         {
             ComboBox combobox = sender as ComboBox;
-            Action.Value = 0;
             Action.Type = (ActionType)combobox.SelectedIndex;
             ShowSelector();
         }
@@ -51,6 +50,26 @@ namespace AudioController.Controls
         private void ChangeKeyboardValue(object sender, RoutedEventArgs e)
         {
             MainWindow.Keyboard.Pressed += ActionItem_Pressed;
+        }
+
+        public void UpdateSelector()
+        {
+            if (Action.Type == ActionType.Mouse)
+            {
+                int selected = 0;
+                if (Action.Value == 8)
+                    selected = 2;
+                if (Action.Value == 32)
+                    selected = 1;
+                Selector_Mouse.SelectedIndex = selected;
+                return;
+            }
+            if (Action.Type == ActionType.Keyboard)
+            {
+                Selector_Keyboard.Text = ((System.Windows.Forms.Keys)Action.Value).ToString();
+                return;
+            }
+            ShowSelector();
         }
 
         private void ActionItem_Pressed(System.Windows.Forms.Keys key)

@@ -48,7 +48,30 @@ namespace AudioController
             UpdateDevice(null, null);
             StartUpdater();
 
+            LoadData();
+
             UpdateUIGlobal();
+            UpdateUIAll();
+        }
+
+        private void LoadData()
+        {
+            if (!DataFile.ContainsSavedData)
+                return;
+            try
+            {
+                DataFile data = DataFile.Load();
+                GlobalDelay = data.Delay;
+                foreach (var @event in data.Events)
+                {
+                    @event.UpdateLinks(UpdateUIContent);
+                    AddEvent(@event);
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+            }
         }
 
         private void UpdateUIGlobal()
@@ -168,7 +191,7 @@ namespace AudioController
         {
             if (SelectedEvent == null)
                 return;
-            SelectedEvent.Device = Devices.FirstOrDefault(x => x.ID == id);
+            SelectedEvent.DeviceID = id;
             SetDevicesListHighlight(id);
         }
 
@@ -263,6 +286,14 @@ namespace AudioController
                 return;
             SelectedEvent.Mode = Content_ModeHold.IsChecked == true ? Mode.Hold : Mode.Switch;
             UpdateUIContent(true);
+        }
+
+        private void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            DataFile data = new DataFile();
+            data.Delay = GlobalDelay;
+            data.Events = Events;
+            DataFile.Save(data);
         }
     }
 }
