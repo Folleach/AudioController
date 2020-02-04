@@ -1,5 +1,6 @@
 ﻿using AudioController.Controls;
 using NAudio.CoreAudioApi;
+using NAudio.Wave;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -22,7 +23,8 @@ namespace AudioController
         internal static Keyboard Keyboard;
         bool needToUpdateDevices;
         Mutex eventsMutext;
-        int CountOpenedTestWindows = 0;
+        int countOpenedTestWindows = 0;
+        WaveIn waveIn;
 
         public bool GlobalActive = false;
         public int GlobalDelay = 10;
@@ -53,6 +55,9 @@ namespace AudioController
 
             UpdateUIGlobal();
             UpdateUIAll();
+
+            waveIn = new WaveIn();
+            waveIn.StartRecording();
         }
 
         private void LoadData()
@@ -83,7 +88,7 @@ namespace AudioController
 
         private void UpdateUIAll()
         {
-            if (IsActive || CountOpenedTestWindows > 0)
+            if (IsActive || countOpenedTestWindows > 0)
             {
                 foreach (var item in Events)
                     item.VisualItem.UpdateUI();
@@ -173,9 +178,9 @@ namespace AudioController
         {
             TestWindow window = new TestWindow(() =>
             {
-                CountOpenedTestWindows--;
+                countOpenedTestWindows--;
             });
-            CountOpenedTestWindows++;
+            countOpenedTestWindows++;
             window.Show();
         }
 
@@ -296,6 +301,7 @@ namespace AudioController
 
         private void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            waveIn.StopRecording();
             DataFile data = new DataFile();
             data.Delay = GlobalDelay;
             data.Events = Events;
