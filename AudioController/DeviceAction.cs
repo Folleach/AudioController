@@ -48,7 +48,7 @@ namespace AudioController
                     Mouse.MouseEvent((LLMouseEvent)(Value << 1));
                     return;
                 case ActionType.Keyboard:
-                    // Nothing to action here...
+                    Keyboard.KeyboardUp((Keys)Value);
                     return;
             }
         }

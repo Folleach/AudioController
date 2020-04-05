@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using WindowsInput;
+using WindowsInput.Native;
 
 namespace AudioController
 {
@@ -28,7 +30,9 @@ namespace AudioController
 
         private delegate IntPtr KeyboardHookProc(int code, IntPtr wParam, IntPtr lParam);
         private KeyboardHookProc _proc;
+
         private IntPtr _hHook = IntPtr.Zero;
+        private static InputSimulator simulator = new InputSimulator();
 
         public Keyboard()
         {
@@ -61,9 +65,14 @@ namespace AudioController
 
         const uint KEYEVENTF_EXTENDEDKEY = 0x0001;
 
-        public static void KeyboardDown(Keys key)
+        public static void KeyboardDown(Keys value)
         {
-            keybd_event((byte)key, 0, KEYEVENTF_EXTENDEDKEY | 0, 0);
+            simulator.Keyboard.KeyDown((VirtualKeyCode)value);
+        }
+
+        internal static void KeyboardUp(Keys value)
+        {
+            simulator.Keyboard.KeyUp((VirtualKeyCode)value);
         }
     }
 }
