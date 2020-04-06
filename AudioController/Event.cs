@@ -80,17 +80,19 @@ namespace AudioController
                     foreach (var item in Actions)
                         item.Up();
             }
-            //else if (Mode == Mode.Switch)
-            //{
-            //    if (value >= CriticalValue && OldValue < CriticalValue)
-            //    {
-            //        LLMouseEvent @event = OldEvent == LLMouseEvent.LeftDown ? LLMouseEvent.LeftUp : LLMouseEvent.LeftDown;
-            //        if (@event == LLMouseEvent.LeftU)
-            //        Mouse.MouseEvent(@event);
-            //        //Keyboard.KeyboardDown(System.Windows.Forms.Keys.Enter);
-            //        OldEvent = @event;
-            //    }
-            //}
+            else if (Mode == Mode.Switch)
+            {
+                if (value >= CriticalValue && OldValue < CriticalValue)
+                {
+                    foreach (var item in Actions)
+                    {
+                        if (item.IsOldDown)
+                            item.Up();
+                        else
+                            item.Down();
+                    }
+                }
+            }
             OldValue = value;
         }
 

@@ -1,5 +1,6 @@
 ﻿using AudioController.Controls;
 using System;
+using System.Diagnostics;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 
@@ -10,6 +11,7 @@ namespace AudioController
     {
         public ActionType Type = ActionType.Mouse;
         public int Value;
+        public bool IsOldDown;
         [XmlIgnore] public ActionItem VisualItem;
         [XmlIgnore] public Event Owner;
 
@@ -29,6 +31,7 @@ namespace AudioController
 
         public void Down()
         {
+            IsOldDown = true;
             switch (Type)
             {
                 case ActionType.Mouse:
@@ -42,6 +45,7 @@ namespace AudioController
 
         public void Up()
         {
+            IsOldDown = false;
             switch (Type)
             {
                 case ActionType.Mouse:
