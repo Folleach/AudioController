@@ -34,7 +34,10 @@ namespace AudioController
             "Button loves you",
             "Click here",
             "If you want to click here... I...",
-            "Don't click past"
+            "Don't click past",
+            "Relayx knows all about you",
+            "Yes, click, I know you can",
+            "Yes, no, yes, no",
         };
 
         public TestWindow(Action closeCallback)
