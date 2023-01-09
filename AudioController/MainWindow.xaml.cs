@@ -148,7 +148,7 @@ namespace AudioController
 
         private void Keyboard_Pressed(Keys obj)
         {
-            if (obj == Keys.F6)
+            if (obj == Keys.R)
             {
                 GlobalActive = !GlobalActive;
                 UpdateUIGlobal();
