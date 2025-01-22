@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:AudioController"
         xmlns:controls="clr-namespace:AudioController.Controls"
         mc:Ignorable="d"
-        Title="Audio Controller for Vladimir Antonov" Height="500" Width="800"
+        Title="Audio Controller" Height="500" Width="800"
         Closing="WindowClosing">
     <Grid Style="{DynamicResource Background}">
         <Grid.ColumnDefinitions>
